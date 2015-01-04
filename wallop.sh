@@ -1,5 +1,5 @@
 CURR_DIR=`dirname $0`
-DATE_NOW=`date '+%Y%m%d-%H%M-%a'`
+DATE_NOW=`env LANG=en_US.UTF-8 date '+%Y%m%d-%H%M-%a'`
 FILENAME=${DATE_NOW}-wallop-$1
 cd $CURR_DIR
 case $1 in

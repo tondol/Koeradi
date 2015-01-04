@@ -20,13 +20,6 @@ foreach (glob("*.flv") as $filename) {
 <body>
   <div class="container">
     <h1>声ラジアーカイバ</h1>
-    <h2>対象プログラム</h2>
-    <ul>
-      <li>agqr-uchiasa (月 20:59 - 21:30)</li>
-      <li>wallop-koncheki (火 21:29 - 22:00)</li>
-      <li>agqr-igaitai (火 23:59 - 24:30)</li>
-      <li>agqr-ageradi (水 18:29 - 19:00)</li>
-    </ul>
     <h2>ファイル一覧</h2>
 <?php if (count($movies) == 0): ?>
     <p>ファイルがありません。</p>
@@ -40,6 +33,22 @@ foreach (glob("*.flv") as $filename) {
   <?php endforeach ?>
     </dl>
 <?php endif ?>
+    <h2>対応局</h2>
+    <ul>
+      <li>agqr</li>
+      <li>wallop</li>
+      <li>hibiki</li>
+    </ul>
+    <h2>対象プログラム</h2>
+    <ul>
+      <li>agqr-uchiasa (Mon 20:59 - 21:30)</li>
+      <li>hibiki-cafe (Mon 23:05)</li>
+      <li>hibiki-imascg (Tue 12:05)</li>
+      <li>wallop-koncheki (Tue 21:29 - 22:00)</li>
+      <li>agqr-igaitai (Tue 23:59 - 24:30)</li>
+      <li>hibiki-nicorinpana (Wed 12:05)</li>
+      <li>agqr-ageradi (Wed 18:29 - 19:00)</li>
+    </ul>
   </div>
 </body>
 </html>
