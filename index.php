@@ -22,11 +22,10 @@ foreach (glob("*.flv") as $filename) {
     <h1>声ラジアーカイバ</h1>
     <h2>対象プログラム</h2>
     <ul>
-      <li>koncheki/wallop (Tue. 21:29 - 22:00)</li>
-      <li>ageradi/agqr (Wed. 18:29 - 19:00)</li>
-      <li>igaitai/agqr (Tue. 23:59 - 24:30)</li>
-      <li>igaitai/agqr (Sun. 14:59 - 15:30) # test</li>
-      <li>uchiasa/agqr (Mon. 20:59 - 21:30)</li>
+      <li>agqr-uchiasa (月 20:59 - 21:30)</li>
+      <li>wallop-koncheki (火 21:29 - 22:00)</li>
+      <li>agqr-igaitai (火 23:59 - 24:30)</li>
+      <li>agqr-ageradi (水 18:29 - 19:00)</li>
     </ul>
     <h2>ファイル一覧</h2>
 <?php if (count($movies) == 0): ?>
