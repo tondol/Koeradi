@@ -8,6 +8,9 @@ foreach (glob("*.flv") as $filename) {
   );
 }
 
+$scripts = array_merge(glob("*.sh"), glob("*.rb"));
+$programs = file_get_contents("crontab.txt");
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,26 +32,18 @@ foreach (glob("*.flv") as $filename) {
       <dt><a href="<?= htmlspecialchars($movie['filename'], ENT_QUOTES) ?>">
         <?= htmlspecialchars($movie['filename'], ENT_QUOTES) ?>
       </a></dt>
-      <dd><?= htmlspecialchars($movie['filesize'], ENT_QUOTES) ?> bytes</dd>
+      <dd><?= htmlspecialchars(sprintf("%.2f", $movie['filesize'] / 1000.0 / 1000.0), ENT_QUOTES) ?> MB</dd>
   <?php endforeach ?>
     </dl>
 <?php endif ?>
     <h2>対応局</h2>
     <ul>
-      <li>agqr</li>
-      <li>wallop</li>
-      <li>hibiki</li>
+<?php foreach ($scripts as $script): ?>
+      <li><?= htmlspecialchars($script, ENT_QUOTES) ?></li>
+<?php endforeach ?>
     </ul>
     <h2>対象プログラム</h2>
-    <ul>
-      <li>agqr-uchiasa (Mon 20:59 - 21:30)</li>
-      <li>hibiki-cafe (Mon 23:05)</li>
-      <li>hibiki-imascg (Tue 12:05)</li>
-      <li>wallop-koncheki (Tue 21:29 - 22:00)</li>
-      <li>agqr-igaitai (Tue 23:59 - 24:30)</li>
-      <li>hibiki-nicorinpana (Wed 12:05)</li>
-      <li>agqr-ageradi (Wed 18:29 - 19:00)</li>
-    </ul>
+    <pre><?= htmlspecialchars($programs, ENT_QUOTES) ?></pre>
   </div>
 </body>
 </html>
