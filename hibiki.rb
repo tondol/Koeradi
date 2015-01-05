@@ -11,7 +11,7 @@ filename = "#{time}-hibiki-#{tag}"
 
 # load programs
 Dir::chdir(File.dirname($0))
-programs = YAML.load_file("hibiki.yaml") || {}
+programs = YAML.load_file("hibiki.yml") || {}
 
 case tag
 when "cafe" then
@@ -50,5 +50,5 @@ if !programs.key?(tag) || programs[tag] != playpath
 
   # save programs
   programs[tag] = playpath
-  File.write("hibiki.yaml", programs.to_yaml)
+  File.write("hibiki.yml", programs.to_yaml)
 end
