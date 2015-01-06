@@ -1,4 +1,5 @@
 .htaccess
 *.log
 *.flv
+*.mp4
 *.yaml

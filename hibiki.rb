@@ -20,6 +20,8 @@ when "nicorinpana" then
   uri = "http://hibiki-radio.jp/description/lovelive_ms"
 when "imascg" then
   uri = "http://hibiki-radio.jp/description/imas_cg"
+when "yutorin" then
+  uri = "http://hibiki-radio.jp/description/aimin"
 end
 
 # download html
@@ -44,9 +46,10 @@ playpath = document.css('a').map {|node|
 if !programs.key?(tag) || programs[tag] != playpath
   # download playpath
   system("ffmpeg -re -i \"#{playpath}\"" +
-    " -c copy" +
+    " -strict -2" +
+    " -vcodec copy -acodec copy" +
     " -bsf:a aac_adtstoasc" +
-    " #{filename}.flv")
+    " #{filename}.mp4")
 
   # save programs
   programs[tag] = playpath

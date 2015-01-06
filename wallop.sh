@@ -9,6 +9,8 @@ rtmpdump --live --stop=$2 \
   -r ${RTMP_URL} \
   -o ${FILENAME}.flv \
   >> wallop.log 2>> wallop_error.log
-#ffmpeg -i ${FILENAME}.flv \
-#  -acodec copy ${FILENAME}.m4a
-#rm ${FILENAME}.flv
+ffmpeg -i ${FILENAME}.flv \
+  -strict -2 \
+  -vcodec copy -acodec copy \
+  ${FILENAME}.mp4
+rm ${FILENAME}.flv

@@ -11,6 +11,3 @@ rtmpdump --live --stop=$2 \
   --swfVfy "http://listenradio.jp/Content/player/ListenRadio.swf" \
   -o ${FILENAME}.flv \
   >> listenradio.log 2>> listenradio_error.log
-#ffmpeg -i ${FILENAME}.flv \
-#  -acodec copy ${FILENAME}.m4a
-#rm ${FILENAME}.flv
