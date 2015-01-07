@@ -1,6 +1,6 @@
 <?php
 
-$filename = $_GET['filename'];
+$filename = basename($_GET['filename']);
 
 ?>
 <!DOCTYPE html>
