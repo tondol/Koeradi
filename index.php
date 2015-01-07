@@ -48,7 +48,7 @@ $programs = file_get_contents("crontab.txt");
             <?= htmlspecialchars($movie['filename'], ENT_QUOTES) ?>
           </div>
           <div class="panel-body">
-            <a href="watch.php?filename=<?= htmlspecialchars($movie['filename'], ENT_QUOTES) ?>" class="btn btn-primary">
+            <a href="player.php?filename=<?= htmlspecialchars($movie['filename'], ENT_QUOTES) ?>" class="btn btn-primary">
                視聴する
             </a>
             <a href="<?= htmlspecialchars($movie['filename'], ENT_QUOTES) ?>" class="btn btn-default">

@@ -4,6 +4,7 @@ FILENAME=${DATE_NOW}-listenradio-$1
 cd $CURR_DIR
 case $1 in
   uchiinu) RTMP_ID=20095 ;;
+  ekoe) RTMP_ID=20095 ;;
 esac
 rtmpdump --live --stop=$2 \
   -r "rtmp://mtist.as.smartstream.ne.jp/#{RTMP_ID}/livestream" \
