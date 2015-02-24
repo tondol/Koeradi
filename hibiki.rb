@@ -14,7 +14,8 @@ filename = "#{time}-hibiki-#{tag}"
 
 # load programs
 Dir::chdir(File.dirname($0))
-programs = YAML.load_file("hibiki.yml") || {}
+programs = YAML.load_file("hibiki.yml") if File.exist?("hibiki.yml")
+programs ||= {}
 
 case tag
 when "cafe" then
