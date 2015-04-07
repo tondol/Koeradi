@@ -1,6 +1,6 @@
 <?php
 
-$movies = array_merge(glob("*.mp4"), glob("*.flv"));
+$movies = array_merge(glob("*.mp4"), glob("*.m4a"), glob("*.flv"));
 rsort($movies);
 $movies = array_map(function ($filename) {
   return array(
