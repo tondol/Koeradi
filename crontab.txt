@@ -1,12 +1,13 @@
+59 23 * * 0 $KOERADI_DIR/radiko.sh million 1860 $RADIKO_MAIL $RADIKO_PASSWORD
 59 20 * * 1 $KOERADI_DIR/agqr.sh uchiasa 1860
 15 12 * * 2 ruby $KOERADI_DIR/hibiki.rb imascg >> $KOERADI_DIR/hibiki.log 2>> $KOERADI_DIR/hibiki_error.log
 15 12 * * 2 ruby $KOERADI_DIR/hibiki.rb yutorin >> $KOERADI_DIR/hibiki.log 2>> $KOERADI_DIR/hibiki_error.log
 29 21 * * 2 $KOERADI_DIR/wallop.sh koncheki 1860
+29 23 * * 2 $KOERADI_DIR/agqr.sh igaitai 1860
 59 23 * * 2 $KOERADI_DIR/agqr.sh ageradi 1860
-29 00 * * 3 $KOERADI_DIR/agqr.sh igaitai 1860
-59 00 * * 3 $KOERADI_DIR/radiko.sh spark 3660
+59 00 * * 3 $KOERADI_DIR/radiko.sh spark 3660 $RADIKO_MAIL $RADIKO_PASSWORD
 15 12 * * 3 ruby $KOERADI_DIR/hibiki.rb cafe >> $KOERADI_DIR/hibiki.log 2>> $KOERADI_DIR/hibiki_error.log
 15 12 * * 3 ruby $KOERADI_DIR/hibiki.rb nicorinpana >> $KOERADI_DIR/hibiki.log 2>> $KOERADI_DIR/hibiki_error.log
 59 20 * * 3 $KOERADI_DIR/listenradio.sh uchiinu 2160
-59 18 * * 5 $KOERADI_DIR/radiko.sh oucchii 960
+59 18 * * 5 $KOERADI_DIR/radiko.sh oucchii 960 $RADIKO_MAIL $RADIKO_PASSWORD
 59 18 * * 6 $KOERADI_DIR/agqr.sh doudemo 1860
