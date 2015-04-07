@@ -20,7 +20,7 @@ Requirements
 Install
 ----
 
-### rtmpdump/ffmpegの導入
+### rtmpdump/ffmpeg/swftoolsの導入
 
 詳細は割愛します。
 新しめのソースをダウンロードして自前ビルドするのが確実です。
