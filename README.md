@@ -6,11 +6,16 @@ koeradiは声優さんがMCをされているネットラジオ等をアーカ�
 Requirements
 ----
 
+- Perl
+    - `radiko.sh`から呼び出すため
+    - 将来的にはRubyスクリプトに移行する
 - Ruby（Version 1.9 もしくはそれ以降）
+    - `hibiki.rb`から呼び出すため
     - Nokogiri
 - rtmpdump
 - ffmpeg
     - Http Live Streamingに対応したVersion
+- swftools
 
 Install
 ----
