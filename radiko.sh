@@ -11,6 +11,7 @@ case $1 in
   million) RADIKO_ID=OBC ;;
   spark) RADIKO_ID=FMJ ;;
   oucchii) RADIKO_ID=FMGUNMA ;;
+  hits_the_town) RADIKO_ID=NACK5 ;;
 esac
 
 # オリジナルスクリプト
