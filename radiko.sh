@@ -1,6 +1,8 @@
 #!/bin/bash
 
-CURR_DIR=`dirname $0`
+source `dirname $0`/.env
+
+CURR_DIR=${CONTENTS_DIR:-`dirname $0`}
 DATE_NOW=`env LANG=en_US.UTF-8 date '+%Y%m%d-%H%M-%a'`
 FILENAME=${DATE_NOW}-radiko-$1
 DURATION=$2

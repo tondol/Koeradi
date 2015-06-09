@@ -1,5 +1,20 @@
 <?php
 
+# dotenv
+$dotenv_array = explode("\n", file_get_contents(dirname(__FILE__) . "/.env"));
+$dotenv_array = array_map(function ($line) {
+  return explode("=", trim($line));
+}, $dotenv_array);
+$dotenv = array_combine(array_map(function ($pair) {
+  return $pair[0];
+}, $env_array), array_map(function ($pair) {
+  return $pair[1];
+}, $env_array));
+
+$contents_dir = empty($dotenv["CONTENTS_DIR"]) ? dirname(__FILE__) : $dotenv["CONTENTS_DIR"];
+$contents_uri = empty($dotenv["CONTENTS_URI"]) ? "./" : $dotenv["CONTENTS_URI"];
+
+chdir($contents_dir);
 $movies = array_merge(glob("*.mp4"), glob("*.m4a"), glob("*.flv"));
 rsort($movies);
 $movies = array_map(function ($filename) {
@@ -52,18 +67,19 @@ $programs = file_get_contents("crontab.txt");
   <?php foreach ($movies as $movie): ?>
       <?php
         $filesize = sprintf("%.2f", $movie['filesize'] / 1000.0 / 1000.0);
+        $filepath = $contents_uri . $movie['filename'];
       ?>
         <tr>
           <td class="cell-filename">
             <?= htmlspecialchars($movie['filename'], ENT_QUOTES) ?>
           </td>
           <td class="cell-watch">
-            <a href="player.php?filename=<?= htmlspecialchars($movie['filename'], ENT_QUOTES) ?>" class="btn btn-primary">
+            <a href="player.php?filename=<?= htmlspecialchars($filepath, ENT_QUOTES) ?>" class="btn btn-primary">
               視聴する
             </a>
           </td>
           <td class="cell-download">
-            <a href="<?= htmlspecialchars($movie['filename'], ENT_QUOTES) ?>" class="btn btn-default">
+            <a href="<?= htmlspecialchars($filepath, ENT_QUOTES) ?>" class="btn btn-default">
               ダウンロード（<?= htmlspecialchars($filesize, ENT_QUOTES) ?> MB）
             </a>
           </td>

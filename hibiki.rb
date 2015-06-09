@@ -12,8 +12,11 @@ tag = ARGV.shift
 time = Time.now.strftime("%Y%m%d-%H%M-%a")
 filename = "#{time}-hibiki-#{tag}"
 
+# dotenv
+dotenv = Hash[File.read(File.dirname($0) + "/.env").lines.map {|line| line.strip.split("=") }]
+Dir::chdir(dotenv.key?("CONTENTS_DIR") ? dotenv["CONTENTS_DIR"] : File.dirname($0))
+
 # load programs
-Dir::chdir(File.dirname($0))
 programs = YAML.load_file("hibiki.yml") if File.exist?("hibiki.yml")
 programs ||= {}
 

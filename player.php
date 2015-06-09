@@ -1,6 +1,19 @@
 <?php
 
+# dotenv
+$dotenv_array = explode("\n", file_get_contents(dirname(__FILE__) . "/.env"));
+$dotenv_array = array_map(function ($line) {
+  return explode("=", trim($line));
+}, $dotenv_array);
+$dotenv = array_combine(array_map(function ($pair) {
+  return $pair[0];
+}, $env_array), array_map(function ($pair) {
+  return $pair[1];
+}, $env_array));
+
+$contents_uri = empty($dotenv["CONTENTS_URI"]) ? "./" : $dotenv["CONTENTS_URI"];
 $filename = basename($_GET['filename']);
+$filepath = $contents_uri . $filename;
 
 ?>
 <!DOCTYPE html>
@@ -31,7 +44,7 @@ $filename = basename($_GET['filename']);
 </div> 
 <script type="text/javascript">
   jwplayer("player").setup({
-    file: "<?= htmlspecialchars($filename, ENT_QUOTES) ?>",
+    file: "<?= htmlspecialchars($filepath, ENT_QUOTES) ?>",
     width: 640,
     height: 360
   });

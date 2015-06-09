@@ -1,4 +1,8 @@
-CURR_DIR=`dirname $0`
+#!/bin/bash
+
+source `dirname $0`/.env
+
+CURR_DIR=${CONTENTS_DIR:-`dirname $0`}
 DATE_NOW=`env LANG=en_US.UTF-8 date '+%Y%m%d-%H%M-%a'`
 FILENAME=${DATE_NOW}-listenradio-$1
 cd $CURR_DIR

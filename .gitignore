@@ -1,4 +1,5 @@
 .htaccess
+.env
 *.log
 *.flv
 *.mp4
