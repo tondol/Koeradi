@@ -20,6 +20,8 @@ Requirements
 Install
 ----
 
+（将来的に実行環境をDockerfileとして提供したいと思っています。）
+
 ### rtmpdump/ffmpeg/swftoolsの導入
 
 詳細は割愛します。
@@ -34,10 +36,15 @@ $ bundle install
 
 ### .envの記述
 
+ファイルシステムから見た動画配置先と，ブラウザから見た動画配置先をそれぞれ設定します。
+各種スクリプトはこの設定ファイルを参照して動作します。
+
 ```
 CONTENTS_DIR=/home/foo/www/koeradi
 CONTENTS_URI=http://foo.bar.com/koeradi/
 ```
+
+現状パース処理が果てしなく適当なので，空行やコメントがうまく動作しません。
 
 ### crontabの設定
 
