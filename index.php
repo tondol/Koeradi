@@ -72,7 +72,7 @@ $programs = file_get_contents($scripts_dir . "/crontab.txt");
       ?>
         <tr>
           <td class="cell-filename">
-            <?= htmlspecialchars($movie['filename'], ENT_QUOTES) ?>
+            <?= htmlspecialchars($filename, ENT_QUOTES) ?>
           </td>
           <td class="cell-watch">
             <a href="player.php?filename=<?= htmlspecialchars($filename, ENT_QUOTES) ?>" class="btn btn-primary">
