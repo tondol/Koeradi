@@ -29,6 +29,14 @@ Install
 
 ```
 $ git clone https://github.com/tondol/koeradi.git
+$ bundle install
+```
+
+### .envの記述
+
+```
+CONTENTS_DIR=/home/foo/www/koeradi
+CONTENTS_URI=http://foo.bar.com/koeradi/
 ```
 
 ### crontabの設定
@@ -42,7 +50,7 @@ $ git clone https://github.com/tondol/koeradi.git
 具体的には，第1引数に与える放送IDに応じて，ダウンロード先のエンドポイント等を適切に設定する処理を追加していただくことになります。
 こちらも，新しく記述を追加した場合は，プルリクを投げていただければこのリポジトリに取り込みます。
 
-### Apacheの設定
+### apache/nginxの設定
 
 リポジトリのディレクトリを公開ディレクトリ以下に配置することで動作します。
 **Basic認証などの方法によりアクセス制限の設定を追加すること** を強くお薦めします。
