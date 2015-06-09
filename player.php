@@ -1,16 +1,9 @@
 <?php
 
-# dotenv
-$dotenv_array = explode("\n", file_get_contents(dirname(__FILE__) . "/.env"));
-$dotenv_array = array_map(function ($line) {
-  return explode("=", trim($line));
-}, $dotenv_array);
-$dotenv = array_combine(array_map(function ($pair) {
-  return $pair[0];
-}, $env_array), array_map(function ($pair) {
-  return $pair[1];
-}, $env_array));
+date_default_timezone_set('Asia/Tokyo');
+require dirname(__FILE__) . '/dotenv.php';
 
+$dotenv = get_dotenv();
 $contents_uri = empty($dotenv["CONTENTS_URI"]) ? "./" : $dotenv["CONTENTS_URI"];
 $filename = basename($_GET['filename']);
 $filepath = $contents_uri . $filename;
