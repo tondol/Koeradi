@@ -4,6 +4,7 @@ date_default_timezone_set('Asia/Tokyo');
 require dirname(__FILE__) . '/dotenv.php';
 
 $dotenv = get_dotenv();
+$scripts_dir = dirname(__FILE__);
 $contents_dir = empty($dotenv["CONTENTS_DIR"]) ? dirname(__FILE__) : $dotenv["CONTENTS_DIR"];
 $contents_uri = empty($dotenv["CONTENTS_URI"]) ? "./" : $dotenv["CONTENTS_URI"];
 
@@ -20,8 +21,11 @@ $movies = array_map(function ($filename) {
   );
 }, $movies);
 
-$scripts = array_merge(glob("*.sh"), glob("*.rb"));
-$programs = file_get_contents("crontab.txt");
+$scripts = array_merge(
+  glob($scripts_dir . "/*.sh"),
+  glob($scripts_dir . "/*.rb")
+);
+$programs = file_get_contents($scripts_dir . "/crontab.txt");
 
 ?>
 <!DOCTYPE html>
@@ -90,7 +94,7 @@ $programs = file_get_contents("crontab.txt");
     </div>
     <ul>
 <?php foreach ($scripts as $script): ?>
-      <li><?= htmlspecialchars($script, ENT_QUOTES) ?></li>
+      <li><?= htmlspecialchars(basename($script), ENT_QUOTES) ?></li>
 <?php endforeach ?>
     </ul>
     <div class="page-header">
