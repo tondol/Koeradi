@@ -13,8 +13,7 @@ case $1 in
 esac
 rtmpdump --live --stop=$2 \
   -r ${RTMP_URL} \
-  -o ${FILENAME}.flv \
-  >> wallop.log 2>> wallop_error.log
+  -o ${FILENAME}.flv
 ffmpeg -i ${FILENAME}.flv \
   -strict -2 \
   -vcodec copy -acodec copy \
