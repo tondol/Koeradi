@@ -21,8 +21,7 @@ ffmpeg -i "http://mtist.as.smartstream.ne.jp/${RTMP_ID}/livestream/playlist.m3u8
   -strict -2 \
   -absf aac_adtstoasc \
   -vcodec copy -acodec copy \
-  ${FILENAME}.mp4 \
-  >> listenradio.log 2>> listenradio_error.log
+  ${FILENAME}.mp4
 #ffmpeg -i ${FILENAME}.flv \
 #  -strict -2 \
 #  -vcodec copy -acodec copy \

@@ -9,8 +9,7 @@ RTMP_URL=rtmp://fms-base2.mitene.ad.jp/agqr/aandg22
 cd $CURR_DIR
 rtmpdump --live --stop=$2 \
   -r ${RTMP_URL} \
-  -o ${FILENAME}.flv \
-  >> agqr.log 2>> agqr_error.log
+  -o ${FILENAME}.flv
 ffmpeg -i ${FILENAME}.flv \
   -strict -2 \
   -vcodec copy -acodec aac -ar 22050 \
