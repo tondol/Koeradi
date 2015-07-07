@@ -1,12 +1,12 @@
 <?php
 
 date_default_timezone_set('Asia/Tokyo');
-require dirname(__FILE__) . '/dotenv.php';
+require dirname(__FILE__) . '/vendor/autoload.php';
 
-$dotenv = get_dotenv();
+(new Dotenv\Dotenv(dirname(__FILE__)))->load();
 $scripts_dir = dirname(__FILE__);
-$contents_dir = empty($dotenv["CONTENTS_DIR"]) ? dirname(__FILE__) : $dotenv["CONTENTS_DIR"];
-$contents_uri = empty($dotenv["CONTENTS_URI"]) ? "./" : $dotenv["CONTENTS_URI"];
+$contents_dir = empty($_ENV["CONTENTS_DIR"]) ? dirname(__FILE__) : $_ENV["CONTENTS_DIR"];
+$contents_uri = empty($_ENV["CONTENTS_URI"]) ? "./" : $_ENV["CONTENTS_URI"];
 
 $movies = array_merge(
   glob($contents_dir . "/*.mp4"),

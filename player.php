@@ -1,10 +1,10 @@
 <?php
 
 date_default_timezone_set('Asia/Tokyo');
-require dirname(__FILE__) . '/dotenv.php';
+require dirname(__FILE__) . '/vendor/autoload.php';
 
-$dotenv = get_dotenv();
-$contents_uri = empty($dotenv["CONTENTS_URI"]) ? "./" : $dotenv["CONTENTS_URI"];
+(new Dotenv\Dotenv(dirname(__FILE__)))->load();
+$contents_uri = empty($_ENV["CONTENTS_URI"]) ? "./" : $_ENV["CONTENTS_URI"];
 $filename = basename($_GET['filename']);
 $filepath = $contents_uri . $filename;
 
