@@ -8,6 +8,7 @@ FILENAME=${DATE_NOW}-wallop-$1
 cd $CURR_DIR
 case $1 in
   koncheki) RTMP_URL=rtmp://wallop-live1.sp1.fmslive.stream.ne.jp/wallop-live1/_definst_/wallop02 ;;
+  takaradio) RTMP_URL=rtmp://wallop-live1.sp1.fmslive.stream.ne.jp/wallop-live1/_definst_/wallop02 ;;
   waros) RTMP_URL=rtmp://wallop-live1.sp1.fmslive.stream.ne.jp/wallop-live1/_definst_/wallop04 ;;
   athena) RTMP_URL=rtmp://wallop-live1.sp1.fmslive.stream.ne.jp/wallop-live1/_definst_/wallop02 ;;
 esac
