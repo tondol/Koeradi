@@ -1,23 +1,27 @@
 #!/bin/bash
 
+# ./radiko.sh name station duration(secs) mail password
+# name:     prefix for mp4 filename
+# station:  station id of radiko
+#           tokyo fm=FMT, nack5=NACK5, j-wave=FMJ, fm gunma=FMGUMMA, obc radio=OBC, etc
+# duration: duration (seconds) of program
+# mail:     radiko id (mail address)
+# password: radiko password
+
+# オリジナルスクリプト
+# http://kyoshiaki.hatenablog.com/entry/2014/05/04/184748
+
 source `dirname $0`/.env
 
 CURR_DIR=${CONTENTS_DIR:-`dirname $0`}
 DATE_NOW=`env LANG=en_US.UTF-8 date '+%Y%m%d-%H%M-%a'`
 FILENAME=${DATE_NOW}-radiko-$1
-DURATION=$2
-MAIL=$3
-PASSWORD=$4
-cd $CURR_DIR
-case $1 in
-  million) RADIKO_ID=OBC ;;
-  spark) RADIKO_ID=FMJ ;;
-  oucchii) RADIKO_ID=FMGUNMA ;;
-  hits_the_town) RADIKO_ID=NACK5 ;;
-esac
+RADIKO_ID=$2
+DURATION=$3
+MAIL=$4
+PASSWORD=$5
 
-# オリジナルスクリプト
-# http://kyoshiaki.hatenablog.com/entry/2014/05/04/184748
+cd $CURR_DIR
 
 pid=$$
 date=`date '+%Y-%m-%d-%H_%M'`
@@ -127,7 +131,7 @@ fi
 wget -q \
      --header="pragma: no-cache" \
      --header="X-Radiko-App: pc_1" \
-     --header="X-Radiko-App-Version: 2.0.1" \
+     --header="X-Radiko-App-Version: 4.1.0.00" \
      --header="X-Radiko-User: test-stream" \
      --header="X-Radiko-Device: pc" \
      --post-data='\r\n' \
@@ -169,7 +173,7 @@ fi
 wget -q \
      --header="pragma: no-cache" \
      --header="X-Radiko-App: pc_1" \
-     --header="X-Radiko-App-Version: 2.0.1" \
+     --header="X-Radiko-App-Version: 4.1.0.00" \
      --header="X-Radiko-User: test-stream" \
      --header="X-Radiko-Device: pc" \
      --header="X-Radiko-Authtoken: ${authtoken}" \
