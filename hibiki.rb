@@ -34,7 +34,6 @@ res = Net::HTTP.start('vcms-api.hibiki-radio.jp', use_ssl: true) {|http|
 }
 json = JSON.parse(res.body)
 video_id = json['episode']['video']['id']
-pp video_id
 
 # api play_check
 res = Net::HTTP.start('vcms-api.hibiki-radio.jp', use_ssl: true) {|http|
@@ -43,6 +42,7 @@ res = Net::HTTP.start('vcms-api.hibiki-radio.jp', use_ssl: true) {|http|
   http.request(req)
 }
 json = JSON.parse(res.body)
+playpath = json['playlist_url']
 
 if !programs.key?(tag) || programs[tag] != playpath
   # download playpath
