@@ -1,55 +1,48 @@
 #!/usr/local/bin/ruby
 # -*- conding: utf-8 -*-
 
+# ruby hibiki.rb name station
+# name:    prefix for mp4 filename
+# station: station id of hibiki radio station
+
 require 'dotenv'
-require 'nokogiri'
-require 'open-uri'
+require 'json'
+require 'net/http'
 require 'pp'
 require 'yaml'
 
 charset = nil
 uri = nil
 tag = ARGV.shift
+program = ARGV.shift
 time = Time.now.strftime("%Y%m%d-%H%M-%a")
 filename = "#{time}-hibiki-#{tag}"
 
 # dotenv
-Doenv.load
+Dotenv.load
 Dir::chdir(ENV.key?("CONTENTS_DIR") ? ENV["CONTENTS_DIR"] : File.dirname($0))
 
 # load programs
 programs = YAML.load_file("hibiki.yml") if File.exist?("hibiki.yml")
 programs ||= {}
 
-case tag
-when "cafe" then
-  uri = "http://hibiki-radio.jp/description/cafe"
-when "nicorinpana" then
-  uri = "http://hibiki-radio.jp/description/lovelive_ms"
-when "imascg" then
-  uri = "http://hibiki-radio.jp/description/imas_cg"
-when "yutorin" then
-  uri = "http://hibiki-radio.jp/description/aimin"
-end
-
-# download html
-html = open(uri) {|f|
-  charset = f.charset
-  f.read
+# api programs
+res = Net::HTTP.start('vcms-api.hibiki-radio.jp', use_ssl: true) {|http|
+  req = Net::HTTP::Get.new('/api/v1/programs/' + program)
+  req['X-Requested-With'] = 'XMLHttpRequest'
+  http.request(req)
 }
+json = JSON.parse(res.body)
+video_id = json['episode']['video']['id']
+pp video_id
 
-# parse
-document = Nokogiri::HTML.parse(html, nil, charset)
-
-# playpath
-playpath = document.css('a').map {|node|
-  href = node.attribute('href')
-  if href && href.value.include?("m3u8")
-    href.value
-  else
-    nil
-  end
-}.compact.first
+# api play_check
+res = Net::HTTP.start('vcms-api.hibiki-radio.jp', use_ssl: true) {|http|
+  req = Net::HTTP::Get.new('/api/v1/videos/play_check?video_id=' + video_id.to_s)
+  req['X-Requested-With'] = 'XMLHttpRequest'
+  http.request(req)
+}
+json = JSON.parse(res.body)
 
 if !programs.key?(tag) || programs[tag] != playpath
   # download playpath
