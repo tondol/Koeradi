@@ -34,7 +34,7 @@ $programs = file_get_contents($scripts_dir . "/crontab.txt");
   <meta charset="utf-8" />
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-  <title>声ラジアーカイバ</title>
+  <title>Koeradi</title>
   <style>
     .page-header { margin: 20px 0; }
     .page-header h1,
@@ -47,7 +47,7 @@ $programs = file_get_contents($scripts_dir . "/crontab.txt");
 <body>
   <div class="container">
     <div class="page-header">
-      <h1>声ラジアーカイバ</h1>
+      <h1>Koeradi</h1>
     </div>
     <div class="page-header">
       <h2>ファイル一覧</h2>
