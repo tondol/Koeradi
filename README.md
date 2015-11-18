@@ -29,7 +29,8 @@ Install
 ### 必要なファイル郡の設置
 
 ```
-$ git clone https://github.com/tondol/koeradi.git
+$ git clone https://github.com/tondol/Koeradi.git koeradi
+$ cd koeradi
 $ bundle install
 $ php /path/to/composer.phar install
 ```
