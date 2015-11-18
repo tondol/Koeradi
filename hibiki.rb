@@ -3,7 +3,7 @@
 
 # ruby hibiki.rb name station
 # name:    prefix for mp4 filename
-# station: station id of hibiki radio station
+# program: program id of hibiki radio station
 
 require 'dotenv'
 require 'json'
@@ -19,7 +19,7 @@ time = Time.now.strftime("%Y%m%d-%H%M-%a")
 filename = "#{time}-hibiki-#{tag}"
 
 # dotenv
-Dotenv.load
+Dotenv.load!(File.dirname($0) + '/.env')
 Dir::chdir(ENV.key?("CONTENTS_DIR") ? ENV["CONTENTS_DIR"] : File.dirname($0))
 
 # load programs
