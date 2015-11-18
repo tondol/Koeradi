@@ -26,7 +26,7 @@ $filepath = $contents_uri . $filename;
 <body>
 <div class="container">
   <div class="page-header">
-    <h1>声ラジアーカイバ</h1>
+    <h1>Koeradi</h1>
   </div>
   <div class="page-header">
     <h2><?= htmlspecialchars($filename, ENT_QUOTES) ?></h2>
