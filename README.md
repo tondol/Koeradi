@@ -10,6 +10,9 @@ Requirements
     - `radiko.sh`がワンライナーに依存しているため
 - Ruby（Version 1.9 もしくはそれ以降）
     - `hibiki.rb`を実行するため
+- PHP（Version 5.4 もしくはそれ以降）
+    - フロントエンドを実行するため
+    - Composer
 - rtmpdump
 - ffmpeg
     - HLSとTLSに対応したビルド
@@ -28,6 +31,7 @@ Install
 ```
 $ git clone https://github.com/tondol/koeradi.git
 $ bundle install
+$ php /path/to/composer.phar install
 ```
 
 ### .envの記述
