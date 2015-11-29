@@ -150,9 +150,9 @@ fi
 #
 # get partial key
 #
-authtoken=`perl -ne 'print $1 if(/x-radiko-authtoken: ([\w-]+)/i)' auth1_fms_${pid}`
-offset=`perl -ne 'print $1 if(/x-radiko-keyoffset: (\d+)/i)' auth1_fms_${pid}`
-length=`perl -ne 'print $1 if(/x-radiko-keylength: (\d+)/i)' auth1_fms_${pid}`
+authtoken=`ruby -ne 'print $1 if $_ =~ /x-radiko-authtoken: ([\w-]+)/i' auth1_fms_${pid}`
+offset=`ruby -ne 'print $1 if $_ =~ /x-radiko-keyoffset: (\d+)/i' auth1_fms_${pid}`
+length=`ruby -ne 'print $1 if $_ =~ /x-radiko-keylength: (\d+)/i' auth1_fms_${pid}`
 
 partialkey=`dd if=$keyfile bs=1 skip=${offset} count=${length} 2> /dev/null | base64`
 
@@ -192,7 +192,7 @@ fi
 
 echo "authentication success"
 
-areaid=`perl -ne 'print $1 if(/^([^,]+),/i)' auth2_fms_${pid}`
+areaid=`ruby -ne 'print $1 if $_ =~ /^([^,]+),/i' auth2_fms_${pid}`
 echo "areaid: $areaid"
 
 rm -f auth2_fms_${pid}
@@ -208,7 +208,7 @@ fi
 wget -q "http://radiko.jp/v2/station/stream/${RADIKO_ID}.xml"
 
 stream_url=`echo "cat /url/item[1]/text()" | xmllint --shell ${RADIKO_ID}.xml | tail -2 | head -1`
-url_parts=(`echo ${stream_url} | perl -pe 's!^(.*)://(.*?)/(.*)/(.*?)$/!$1://$2 $3 $4!'`)
+url_parts=(`echo $stream_url | ruby -ne 'print $_.chomp.sub(%r!^(.*)://(.*?)/(.*)/(.*?)$!, %q!\1://\2 \3 \4!)'`)
 
 rm -f ${RADIKO_ID}.xml
 

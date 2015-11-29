@@ -4,9 +4,23 @@ date_default_timezone_set('Asia/Tokyo');
 require dirname(__FILE__) . '/vendor/autoload.php';
 
 (new Dotenv\Dotenv(dirname(__FILE__)))->load();
-$contents_uri = empty($_ENV["CONTENTS_URI"]) ? "./" : $_ENV["CONTENTS_URI"];
 $filename = basename($_GET['filename']);
-$filepath = $contents_uri . $filename;
+$contents_dir = empty($_ENV["CONTENTS_DIR"]) ? "." : $_ENV["CONTENTS_DIR"];
+$contents_dir_uri = empty($_ENV["CONTENTS_DIR_URI"]) ? "." : $_ENV["CONTENTS_DIR_URI"];
+$acd_cli_cache_path = empty($_ENV["ACD_CLI_CACHE_PATH"]) ? "." : $_ENV["ACD_CLI_CACHE_PATH"];
+$acd_cli_contents_dir = empty($_ENV["ACD_CLI_CONTENTS_DIR"]) ? "" : $_ENV["ACD_CLI_CONTENTS_DIR"];
+
+if (filesize("$contents_dir/$filename") == 0) {
+  # On Amazon Cloud Drive
+  $json = json_decode(shell_exec(
+      "ACD_CLI_CACHE_PATH=$acd_cli_cache_path " .
+      "acd_cli metadata $acd_cli_contents_dir/$filename 2>&1"), true);
+  $pathinfo = pathinfo($filename);
+  $uri = $json["tempLink"] . "?/v." . $pathinfo["extension"];
+} else {
+  # On File System
+  $uri = "$contents_dir_uri/$filename";
+}
 
 ?>
 <!DOCTYPE html>
@@ -37,7 +51,7 @@ $filepath = $contents_uri . $filename;
 </div> 
 <script type="text/javascript">
   jwplayer("player").setup({
-    file: "<?= htmlspecialchars($filepath, ENT_QUOTES) ?>",
+    file: "<?= htmlspecialchars($uri, ENT_QUOTES) ?>",
     width: 640,
     height: 360
   });
