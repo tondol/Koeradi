@@ -3,6 +3,7 @@
 source `dirname $0`/.env
 
 export ACD_CLI_CACHE_PATH
+acd_cli sync
 
 for path in $CONTENTS_DIR/*.{mp4,m4a,flv}; do
   if [ ! -f $path -o ! -s $path ]; then
