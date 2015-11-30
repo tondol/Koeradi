@@ -6,7 +6,7 @@ require dirname(__FILE__) . '/vendor/autoload.php';
 (new Dotenv\Dotenv(dirname(__FILE__)))->load();
 $scripts_dir = dirname(__FILE__);
 $contents_dir = empty($_ENV["CONTENTS_DIR"]) ? dirname(__FILE__) : $_ENV["CONTENTS_DIR"];
-$contents_uri = empty($_ENV["CONTENTS_URI"]) ? "./" : $_ENV["CONTENTS_URI"];
+$contents_dir_uri = empty($_ENV["CONTENTS_DIR_URI"]) ? "." : $_ENV["CONTENTS_DIR_URI"];
 
 $movies = array_merge(
   glob($contents_dir . "/*.mp4"),
@@ -14,12 +14,6 @@ $movies = array_merge(
   glob($contents_dir . "/*.flv")
 );
 rsort($movies);
-$movies = array_map(function ($filename) {
-  return array(
-    'filename' => $filename,
-    'filesize' => filesize($filename),
-  );
-}, $movies);
 
 $scripts = array_merge(
   glob($scripts_dir . "/*.sh"),
@@ -60,15 +54,12 @@ $programs = file_get_contents($scripts_dir . "/crontab.txt");
       <tr>
         <th>ファイル名</th>
         <th>視聴</th>
-        <th>ダウンロード</th>
       </tr>
       </thead>
       <tbody>
   <?php foreach ($movies as $movie): ?>
       <?php
-        $filesize = sprintf("%.2f", $movie['filesize'] / 1000.0 / 1000.0);
-        $filename = basename($movie['filename']);
-        $filepath = $contents_uri . $filename;
+        $filename = basename($movie);
       ?>
         <tr>
           <td class="cell-filename">
@@ -77,11 +68,6 @@ $programs = file_get_contents($scripts_dir . "/crontab.txt");
           <td class="cell-watch">
             <a href="player.php?filename=<?= htmlspecialchars($filename, ENT_QUOTES) ?>" class="btn btn-primary">
               視聴する
-            </a>
-          </td>
-          <td class="cell-download">
-            <a href="<?= htmlspecialchars($filepath, ENT_QUOTES) ?>" class="btn btn-default">
-              ダウンロード（<?= htmlspecialchars($filesize, ENT_QUOTES) ?> MB）
             </a>
           </td>
         </tr>

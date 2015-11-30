@@ -17,9 +17,11 @@ if (filesize("$contents_dir/$filename") == 0) {
       "acd_cli metadata $acd_cli_contents_dir/$filename 2>&1"), true);
   $pathinfo = pathinfo($filename);
   $uri = $json["tempLink"] . "?/v." . $pathinfo["extension"];
+  $filesize = sprintf("%.2fMB", $json["contentProperties"]["size"] / 1000.0 / 1000.0);
 } else {
   # On File System
   $uri = "$contents_dir_uri/$filename";
+  $filesize = sprintf("%.2fMB", filesize($contents_dir . "/" . $filename) / 1000.0 / 1000.0);
 }
 
 ?>
@@ -47,8 +49,13 @@ if (filesize("$contents_dir/$filename") == 0) {
   </div>
   <div id="player"></div>
   <hr />
-  <p><a href="index.php" class="btn btn-primary">一覧に戻る</a></p>
-</div> 
+  <p>
+    <a href="index.php" class="btn btn-primary">一覧に戻る</a>
+    <a href="<?= htmlspecialchars($uri, ENT_QUOTES) ?>" class="btn btn-default">
+    ダウンロード（<?= htmlspecialchars($filesize, ENT_QUOTES) ?>）
+    </a>
+  </p>
+</div>
 <script type="text/javascript">
   jwplayer("player").setup({
     file: "<?= htmlspecialchars($uri, ENT_QUOTES) ?>",
