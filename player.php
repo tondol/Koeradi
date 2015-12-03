@@ -11,7 +11,10 @@ $acd_cli_cache_path = empty($_ENV["ACD_CLI_CACHE_PATH"]) ? "." : $_ENV["ACD_CLI_
 $acd_cli_contents_dir = empty($_ENV["ACD_CLI_CONTENTS_DIR"]) ? "" : $_ENV["ACD_CLI_CONTENTS_DIR"];
 
 if (filesize("$contents_dir/$filename") == 0) {
-  # On Amazon Cloud Drive
+  // On Amazon Cloud Drive
+  //var_dump(shell_exec(
+  //    "ACD_CLI_CACHE_PATH=$acd_cli_cache_path " .
+  //    "acd_cli metadata $acd_cli_contents_dir/$filename 2>&1"));
   $json = json_decode(shell_exec(
       "ACD_CLI_CACHE_PATH=$acd_cli_cache_path " .
       "acd_cli metadata $acd_cli_contents_dir/$filename 2>&1"), true);
@@ -19,7 +22,7 @@ if (filesize("$contents_dir/$filename") == 0) {
   $uri = $json["tempLink"] . "?/v." . $pathinfo["extension"];
   $filesize = sprintf("%.2fMB", $json["contentProperties"]["size"] / 1000.0 / 1000.0);
 } else {
-  # On File System
+  // On File System
   $uri = "$contents_dir_uri/$filename";
   $filesize = sprintf("%.2fMB", filesize($contents_dir . "/" . $filename) / 1000.0 / 1000.0);
 }
