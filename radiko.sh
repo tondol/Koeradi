@@ -128,12 +128,13 @@ fi
 #
 # access auth1_fms
 #
-wget -q \
+wget \
      --header="pragma: no-cache" \
      --header="X-Radiko-App: pc_1" \
-     --header="X-Radiko-App-Version: 4.1.0.00" \
-     --header="X-Radiko-User: test-stream" \
+     --header="X-Radiko-App-Version: 2.0.1" \
      --header="X-Radiko-Device: pc" \
+     --header="X-Radiko-User: test-stream" \
+     --header="X-Requested-With: ShockwaveFlash/21.0.0.197" \
      --post-data='\r\n' \
      --no-check-certificate \
      --load-cookies $cookiefile \
@@ -173,11 +174,12 @@ fi
 wget -q \
      --header="pragma: no-cache" \
      --header="X-Radiko-App: pc_1" \
-     --header="X-Radiko-App-Version: 4.1.0.00" \
-     --header="X-Radiko-User: test-stream" \
+     --header="X-Radiko-App-Version: 2.0.1" \
+     --header="X-Radiko-AuthToken: ${authtoken}" \
      --header="X-Radiko-Device: pc" \
-     --header="X-Radiko-Authtoken: ${authtoken}" \
-     --header="X-Radiko-Partialkey: ${partialkey}" \
+     --header="X-Radiko-PartialKey: ${partialkey}" \
+     --header="X-Radiko-User: test-stream" \
+     --header="X-Requested-With: ShockwaveFlash/21.0.0.197" \
      --post-data='\r\n' \
      --load-cookies $cookiefile \
      --no-check-certificate \

@@ -11,6 +11,10 @@ for path in $CONTENTS_DIR/*.{mp4,m4a,flv}; do
   fi
 
   acd_cli upload -o $path $ACD_CLI_CONTENTS_DIR
+  if [ $? -ne 0 ]; then
+    echo "return code: $?"
+    break
+  fi
   rm $path
   touch $path
 done
