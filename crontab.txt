@@ -2,11 +2,9 @@
 29 21  *  * 2 tondol $KOERADI_DIR/wallop.sh koncheki wallop02 1860 >> $KOERADI_DIR/wallop.log 2>&1
 59 21  *  * 2 tondol $KOERADI_DIR/wallop.sh takaradio wallop02 1860 >> $KOERADI_DIR/wallop.log 2>&1
 29 23  *  * 2 tondol $KOERADI_DIR/agqr.sh igaitai 1860 >> $KOERADI_DIR/agqr.log 2>&1
-59 23  *  * 2 tondol $KOERADI_DIR/agqr.sh ageradi 1860 >> $KOERADI_DIR/agqr.log 2>&1
 59 00  *  * 3 tondol $KOERADI_DIR/radiko.sh spark FMJ 3660 $RADIKO_MAIL $RADIKO_PASSWORD >> $KOERADI_DIR/radiko.log 2>&1
-15 12  *  * 3 tondol ruby $KOERADI_DIR/hibiki.rb cafe cafe >> $KOERADI_DIR/hibiki.log 2>&1
-15 12  *  * 3 tondol ruby $KOERADI_DIR/hibiki.rb nicorinpana lovelive_ms >> $KOERADI_DIR/hibiki.log 2>&1
-29 19  *  * 3 tondol $KOERADI_DIR/agqr.sh uchiinu 1860 >> $KOERADI_DIR/agqr.log 2>&1
+15 12  *  * 3 tondol ruby $KOERADI_DIR/hibiki.rb tsunradi tsunradi >> $KOERADI_DIR/hibiki.log 2>&1
+29 19  *  * 3 tondol $KOERADI_DIR/agqr.sh ageradi 1860 >> $KOERADI_DIR/agqr.log 2>&1
 59 18  *  * 5 tondol $KOERADI_DIR/radiko.sh oucchii FMGUNMA 960 $RADIKO_MAIL $RADIKO_PASSWORD >> $KOERADI_DIR/radiko.log 2>&1
-59 18  *  * 6 tondol $KOERADI_DIR/agqr.sh doudemo 1860 >> $KOERADI_DIR/agqr.log 2>&1
-59 20 26 03 * tondol $KOERADI_DIR/radiko.sh spark FMJ 3660 $RADIKO_MAIL $RADIKO_PASSWORD >> $KOERADI_DIR/radiko.log 2>&1
+29 19  *  * 5 tondol $KOERADI_DIR/agqr.sh doudemo 1860 >> $KOERADI_DIR/agqr.log 2>&1
+59 20 16 04 * tondol $KOERADI_DIR/agqr.sh agson 7260 >> $KOERADI_DIR/agqr.log 2>&1
