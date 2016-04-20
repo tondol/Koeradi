@@ -12,12 +12,20 @@ $acd_cli_contents_dir = empty($_ENV["ACD_CLI_CONTENTS_DIR"]) ? "" : $_ENV["ACD_C
 
 if (filesize("$contents_dir/$filename") == 0) {
   // On Amazon Cloud Drive
-  //var_dump(shell_exec(
-  //    "ACD_CLI_CACHE_PATH=$acd_cli_cache_path " .
-  //    "acd_cli metadata $acd_cli_contents_dir/$filename 2>&1"));
   $json = json_decode(shell_exec(
       "ACD_CLI_CACHE_PATH=$acd_cli_cache_path " .
-      "acd_cli metadata $acd_cli_contents_dir/$filename 2>&1"), true);
+      "ACD_CLI_SETTINGS_PATH=$acd_cli_cache_path " .
+      "/usr/local/bin/acdcli metadata $acd_cli_contents_dir/$filename 2>&1"), true);
+  if (is_null($json)) {
+      shell_exec(
+          "ACD_CLI_CACHE_PATH=$acd_cli_cache_path " .
+          "ACD_CLI_SETTINGS_PATH=$acd_cli_cache_path " .
+          "/usr/local/bin/acdcli sync");
+      $json = json_decode(shell_exec(
+          "ACD_CLI_CACHE_PATH=$acd_cli_cache_path " .
+          "ACD_CLI_SETTINGS_PATH=$acd_cli_cache_path " .
+          "/usr/local/bin/acdcli metadata $acd_cli_contents_dir/$filename 2>&1"), true);
+  }
   $pathinfo = pathinfo($filename);
   $uri = $json["tempLink"] . "?/v." . $pathinfo["extension"];
   $filesize = sprintf("%.2fMB", $json["contentProperties"]["size"] / 1000.0 / 1000.0);
