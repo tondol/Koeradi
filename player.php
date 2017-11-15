@@ -42,7 +42,9 @@ if (filesize("$contents_dir/$filename") == 0) {
   <meta charset="utf-8" />
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-  <script src="https://jwpsrv.com/library/Jr71WDfEEeO6GhIxOQfUww.js"></script>
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/dplayer/1.16.0/DPlayer.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/flv.js/1.3.3/flv.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/dplayer/1.16.0/DPlayer.min.js"></script>
   <title><?= htmlspecialchars($filename, ENT_QUOTES) ?></title>
   <style>
     .page-header { margin: 20px 0; }
@@ -68,11 +70,14 @@ if (filesize("$contents_dir/$filename") == 0) {
   </p>
 </div>
 <script type="text/javascript">
-  jwplayer("player").setup({
-    file: "<?= htmlspecialchars($uri, ENT_QUOTES) ?>",
-    width: 640,
-    height: 360
-  });
+var dp = new DPlayer({
+    container: document.getElementById('player'),
+    screenshot: true,
+    video: {
+        url: "<?= htmlspecialchars($uri, ENT_QUOTES) ?>",
+    }
+});
+
 </script>
 </body>
 </html>
