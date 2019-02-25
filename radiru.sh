@@ -8,6 +8,7 @@
 
 # オリジナルスクリプト
 # https://gist.github.com/riocampos/5656450
+# https://gist.github.com/riocampos/93739197ab7c765d16004cd4164dca73
 
 source `dirname $0`/.env
 
@@ -23,30 +24,17 @@ echo $CURR_DIR/$FILENAME.m4a
 
 case $STATION in
   "NHK1")
-  PLAYPATH="NetRadio_R1_flash@63346"
-  URL="rtmpe://netradio-r1-flash.nhk.jp"
+  URL="https://nhkradioakfm-i.akamaihd.net/hls/live/512290/1-fm/1-fm-01.m3u8"
   ;;
   "NHK2")
-  PLAYPATH="NetRadio_R2_flash@63342"
-  URL="rtmpe://netradio-r2-flash.nhk.jp"
+  URL="https://nhkradioakr2-i.akamaihd.net/hls/live/511929/1-r2/1-r2-01.m3u8"
   ;;
   "FM")
-  PLAYPATH="NetRadio_FM_flash@63343"
-  URL="rtmpe://netradio-fm-flash.nhk.jp"
+  URL="https://nhkradioakfm-i.akamaihd.net/hls/live/512290/1-fm/1-fm-01.m3u8"
   ;;
   *)
   exit
   ;;
 esac
 
-rtmpdump --rtmp "${URL}" \
-         --playpath "${PLAYPATH}" \
-         --app "live" \
-         --swfVfy http://www3.nhk.or.jp/netradio/files/swf/rtmpe_ver2015.swf \
-         --live \
-         --stop ${DURATION} \
-         -o /tmp/${FILENAME}.flv
-ffmpeg -i /tmp/${FILENAME}.flv \
-       -acodec copy \
-       ${FILENAME}.m4a
-rm /tmp/${FILENAME}.flv
+ffmpeg -i ${URL} -t ${DURATION} -c copy ${FILENAME}.m4a
