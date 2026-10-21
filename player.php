@@ -4,36 +4,17 @@ date_default_timezone_set('Asia/Tokyo');
 require dirname(__FILE__) . '/vendor/autoload.php';
 
 Dotenv\Dotenv::createImmutable(dirname(__FILE__))->load();
-$filename = basename($_GET['filename']);
+$filename = basename($_GET['filename'] ?? "");
 $contents_dir = empty($_ENV["CONTENTS_DIR"]) ? "." : $_ENV["CONTENTS_DIR"];
 $contents_dir_uri = empty($_ENV["CONTENTS_DIR_URI"]) ? "." : $_ENV["CONTENTS_DIR_URI"];
-$acd_cli_cache_path = empty($_ENV["ACD_CLI_CACHE_PATH"]) ? "." : $_ENV["ACD_CLI_CACHE_PATH"];
-$acd_cli_contents_dir = empty($_ENV["ACD_CLI_CONTENTS_DIR"]) ? "" : $_ENV["ACD_CLI_CONTENTS_DIR"];
 
-if (filesize("$contents_dir/$filename") == 0) {
-  // On Amazon Cloud Drive
-  $json = json_decode(shell_exec(
-      "ACD_CLI_CACHE_PATH=$acd_cli_cache_path " .
-      "ACD_CLI_SETTINGS_PATH=$acd_cli_cache_path " .
-      "/usr/local/bin/acdcli metadata $acd_cli_contents_dir/$filename 2>&1"), true);
-  if (is_null($json)) {
-      shell_exec(
-          "ACD_CLI_CACHE_PATH=$acd_cli_cache_path " .
-          "ACD_CLI_SETTINGS_PATH=$acd_cli_cache_path " .
-          "/usr/local/bin/acdcli sync");
-      $json = json_decode(shell_exec(
-          "ACD_CLI_CACHE_PATH=$acd_cli_cache_path " .
-          "ACD_CLI_SETTINGS_PATH=$acd_cli_cache_path " .
-          "/usr/local/bin/acdcli metadata $acd_cli_contents_dir/$filename 2>&1"), true);
-  }
-  $pathinfo = pathinfo($filename);
-  $uri = $json["tempLink"] . "?/v." . $pathinfo["extension"];
-  $filesize = sprintf("%.2fMB", $json["contentProperties"]["size"] / 1000.0 / 1000.0);
-} else {
-  // On File System
-  $uri = "$contents_dir_uri/$filename";
-  $filesize = sprintf("%.2fMB", filesize($contents_dir . "/" . $filename) / 1000.0 / 1000.0);
+if ($filename === "" || !is_file("$contents_dir/$filename") || filesize("$contents_dir/$filename") === 0) {
+  http_response_code(404);
+  exit("not found");
 }
+
+$uri = "$contents_dir_uri/" . rawurlencode($filename);
+$filesize = sprintf("%.2fMB", filesize("$contents_dir/$filename") / 1000.0 / 1000.0);
 
 ?>
 <!DOCTYPE html>
