@@ -3,7 +3,7 @@
 date_default_timezone_set('Asia/Tokyo');
 require dirname(__FILE__) . '/vendor/autoload.php';
 
-(new Dotenv\Dotenv(dirname(__FILE__)))->load();
+Dotenv\Dotenv::createImmutable(dirname(__FILE__))->load();
 $scripts_dir = dirname(__FILE__);
 $contents_dir = empty($_ENV["CONTENTS_DIR"]) ? dirname(__FILE__) : $_ENV["CONTENTS_DIR"];
 $contents_dir_uri = empty($_ENV["CONTENTS_DIR_URI"]) ? "." : $_ENV["CONTENTS_DIR_URI"];
